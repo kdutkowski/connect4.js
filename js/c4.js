@@ -1,7 +1,7 @@
 var C4 = function(_options) {
 	var _game = this;
-	var _columns = 7;
-	var _rows = 6;
+	var _columns = 4;
+	var _rows = 4;
 	var _counter = 0;
 	var _event_handlers = {};
 
@@ -58,7 +58,7 @@ var C4 = function(_options) {
 		if (!(event in _event_handlers)) return;
 
 		var handlers = _event_handlers[event];
-		$.each(handlers, function(index, handler) {
+		handlers.forEach(function(handler) {
 			handler(data);
 		});
 	};

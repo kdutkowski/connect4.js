@@ -8,13 +8,10 @@ C4.AI = function(_game, _player, _strength) {
 
 	function findAndPlayMove() {
 		if (_game.current === _player) {
-			// Give the previous move's drop animation some time to finish
-			setTimeout(function() {
-				var best = alphabeta(_strength, -Infinity, Infinity, _player);
-				var r = _game.util.getDropRow(_best_col);
-				_game.trigger('drop', { col_index : _best_col });
-				_best_col = 0;
-			}, 500);
+			var best = alphabeta(_strength, -Infinity, Infinity, _player);
+			var r = _game.util.getDropRow(_best_col);
+			_game.trigger('drop', { col_index : _best_col });
+			_best_col = 0;
 		}
 	}
  
@@ -45,7 +42,8 @@ C4.AI = function(_game, _player, _strength) {
 
 				// Recursively calculate the best result this move could have
 				// for this player
-				alpha = Math.max(alpha, alphabeta(depth - 1, alpha, beta, player.opponent));
+				var alphabeta_result = alphabeta(depth - 1, alpha, beta, player.opponent);
+				alpha = Math.max(alpha, alphabeta_result);
 
 				// Undo the move
 				delete _rack[c][r];
@@ -167,7 +165,7 @@ C4.AI = function(_game, _player, _strength) {
 		];
 
 		var score = 0;
-		$.each(views, function(i, view) {
+		views.forEach(function(view) {
 
 			var player_view = view.replace(/X/g, '#');
 			var opponent_view = view.replace(/O/g, '#');
@@ -182,7 +180,8 @@ C4.AI = function(_game, _player, _strength) {
 				return false;
 			}
 
-			$.each(patterns, function(name, pattern) {
+			for(var pattern_key in patterns) {
+				var pattern = patterns[pattern_key];
 				var matches = player_view.match(pattern.rx);
 				if (matches) {
 					score += matches.length * pattern.value;
@@ -192,7 +191,7 @@ C4.AI = function(_game, _player, _strength) {
 				if (matches) {
 					score -= matches.length * pattern.value;
 				}
-			});
+			}
 		});
 
 		return score;

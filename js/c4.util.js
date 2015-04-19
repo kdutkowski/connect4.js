@@ -10,7 +10,7 @@ C4.Util = function(_game) {
 		var directions = [[0,1], [-1,1], [1,1], [1, 0]];
 
 		walkRack(function(player, c, r) {
-			$.each(directions, function(i, direction) {
+			directions.forEach( function(direction) {
 				var result = findConnectedInDirection(c, r, direction[0], direction[1]);
 				if (result.length >= 4) {
 					connected = connected.concat(result);
