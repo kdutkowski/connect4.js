@@ -67,8 +67,9 @@ var generate_rack = function _generate_rack(_rack, depth) {
             })) {
             continue;
         }
-
-        startGame(5, 5, JSON.parse(JSON.stringify(_rack)));
+        if (depth % 2 === 0) {
+            startGame(5, 5, JSON.parse(JSON.stringify(_rack)));
+        }
         _generate_rack(JSON.parse(JSON.stringify(_rack)), depth + 1);
     }
 };
