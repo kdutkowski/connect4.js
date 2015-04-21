@@ -8,4 +8,4 @@ node_js:
   - "stable"
   - "iojs"
   - "iojs-v1.0.4" 
-script: cd js && node main.js
+script: cd js && node main.js 0 14

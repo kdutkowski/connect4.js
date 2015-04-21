@@ -43,6 +43,21 @@ var C4 = function (_options) {
         }
         this.rack = _options.rack;
 
+        var input = [];
+        for (r = 0; r < _rows; r++) {
+            for (c = 0; c < _columns; c++) {
+                _cell = this.rack[c][r];
+                if (_cell === activePlayer) {
+                    input.push(1);
+                } else if (_cell === passivePlayer) {
+                    input.push(-1);
+                } else {
+                    input.push(0);
+                }
+
+            }
+        }
+
         C4.Util(this);
         C4.UI(this, _options);
 
@@ -55,20 +70,7 @@ var C4 = function (_options) {
         }
 
         this.trigger('waitingForDrop');
-        var input = [];
-        for (c = 0; c < _columns; c++) {
-            for (r = 0; r < _rows; r++) {
-                _cell = this.rack[c][r];
-                if (_cell === activePlayer) {
-                    input.push(1);
-                } else if (_cell === passivePlayer) {
-                    input.push(-1);
-                } else {
-                    input.push(0);
-                }
 
-            }
-        }
         var _moves = this.moves;
         if (_moves.length === 0) {
             console.error("Already Ended", input);

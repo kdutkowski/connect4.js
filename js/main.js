@@ -74,4 +74,10 @@ var generate_rack = function _generate_rack(_rack, depth) {
     }
 };
 
-generate_rack(rack, 0);
+var args = process.argv.slice(2);
+var start_col = parseInt(args[0], 10);
+var depth = parseInt(args[1], 10) || 1;
+console.error("Start column ", start_col);
+console.error("Depth", depth);
+rack[start_col][_rows-1] = players[0];
+generate_rack(rack, depth);
