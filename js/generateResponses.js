@@ -31,13 +31,40 @@ rd.on('line', function(line) {
     var dataLine = line.split(',').map(function(x) {
         return Number(x)
     });
-    rack = [];
+    console.log(dataLine);
+    rack = createRack();
     for (var i=0; i<cols; i++) {
-        row = [];
         for (var j=0; j<rows; j++) {
-            row[j] = dataLine[i * cols + j];
+            rack[i][j] = dataLine[i + j * cols];
         }
-        rack.push(row);
     }
-    console.log(rack);
+
+    console.log('rack', rack);
+
+    var game = new C4({
+        ai_1_strength: 2,
+        ai_2_strength: 2,
+        container: '#board',
+        rack: rack
+    });
+
+
 });
+
+function startGame(ai_1_strength, ai_2_strength, rack) {
+    var game = new C4({
+        ai_1_strength: ai_1_strength,
+        ai_2_strength: ai_2_strength,
+        container: '#board',
+        rack: rack
+    });
+}
+
+function createRack() {
+
+    var rack = new Array(cols);
+    for (var c = 0; c < cols; c++) {
+        rack[c] = new Array(rows);
+    }
+    return rack;
+}
