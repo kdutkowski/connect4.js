@@ -19,7 +19,7 @@ var cols = args[0]
 var rows = args[1]
 var filename = args[2]
 
-console.log('cols ', cols, 'rows ', rows);
+//console.log('col ', cols, 'rows ', rows);
 
 var rd = readline.createInterface({
     input: fs.createReadStream(filename),
@@ -31,15 +31,13 @@ rd.on('line', function(line) {
     var dataLine = line.split(',').map(function(x) {
         return Number(x)
     });
-    console.log(dataLine);
+    //console.log(dataLine);
     rack = createRack();
     for (var i=0; i<cols; i++) {
         for (var j=0; j<rows; j++) {
             rack[i][j] = dataLine[i + j * cols];
         }
     }
-
-    console.log('rack', rack);
 
     var game = new C4({
         ai_1_strength: 2,

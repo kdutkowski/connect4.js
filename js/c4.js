@@ -75,7 +75,8 @@ var C4 = function (_options) {
         if (_moves.length === 0) {
             console.error("Already Ended", input);
         } else {
-            console.log(input.join(",") + ',' + _moves[0].col_index);
+            var normalizedMove = _moves[0].col_index / _columns.toFixed(2);
+            console.log(input.join(",") + ',' + normalizedMove);
         }
     };
 
@@ -111,6 +112,7 @@ var C4 = function (_options) {
                 col_index: data.col_index,
                 row_index: row_index
             });
+            //console.log('col ', data.col_index, 'row ', row_index);
             _game.trigger('done');
         }
     });
